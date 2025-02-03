@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID; // ✅ Import UUID
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/education")
 public class EducationController {
@@ -19,9 +21,9 @@ public class EducationController {
         return educationService.getAllEducationDetails();
     }
 
-    @GetMapping("/{id}")
-    public Education getEducationById(@PathVariable Long id) {
-        return educationService.getEducationById(id);
+    @GetMapping("/{uuid}") // ✅ Changed {id} to {uuid}
+    public Education getEducationById(@PathVariable UUID uuid) { // ✅ Changed Long to UUID
+        return educationService.getEducationById(uuid);
     }
 
     @PostMapping
@@ -29,13 +31,13 @@ public class EducationController {
         return educationService.createEducation(education);
     }
 
-    @PutMapping("/{id}")
-    public Education updateEducation(@PathVariable Long id, @RequestBody Education education) {
-        return educationService.updateEducation(id, education);
+    @PutMapping("/{uuid}") // ✅ Changed {id} to {uuid}
+    public Education updateEducation(@PathVariable UUID uuid, @RequestBody Education education) { // ✅ Changed Long to UUID
+        return educationService.updateEducation(uuid, education);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteEducation(@PathVariable Long id) {
-        educationService.deleteEducation(id);
+    @DeleteMapping("/{uuid}") // ✅ Changed {id} to {uuid}
+    public void deleteEducation(@PathVariable UUID uuid) { // ✅ Changed Long to UUID
+        educationService.deleteEducation(uuid);
     }
 }

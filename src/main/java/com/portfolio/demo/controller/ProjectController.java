@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
+@CrossOrigin(origins = "http://localhost:5173") 
 @RestController
 @RequestMapping("/api/projects")
 public class ProjectController {
@@ -18,10 +20,10 @@ public class ProjectController {
     public List<Project> getAllProjects() {
         return projectService.getAllProjects();
     }
-
-    @GetMapping("/{id}")
-    public Project getProjectById(@PathVariable Long id) {
-        return projectService.getProjectById(id);
+    
+    @GetMapping("/{uuid}")
+    public Project getProjectById(@PathVariable UUID uuid) { // Change to UUID
+        return projectService.getProjectById(uuid);
     }
 
     @PostMapping
@@ -29,13 +31,13 @@ public class ProjectController {
         return projectService.createProject(project);
     }
 
-    @PutMapping("/{id}")
-    public Project updateProject(@PathVariable Long id, @RequestBody Project project) {
-        return projectService.updateProject(id, project);
+    @PutMapping("/{uuid}")
+    public Project updateProject(@PathVariable UUID uuid, @RequestBody Project project) { // Change to UUID
+        return projectService.updateProject(uuid, project);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteProject(@PathVariable Long id) {
-        projectService.deleteProject(id);
+    @DeleteMapping("/{uuid}")
+    public void deleteProject(@PathVariable UUID uuid) { // Change to UUID
+        projectService.deleteProject(uuid);
     }
 }

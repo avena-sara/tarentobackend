@@ -8,14 +8,16 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.util.UUID; // ✅ Import UUID
+
 @Entity
 @Table(name = "personal_info")
 @Data // Lombok annotation to generate getters, setters, equals, hashcode, toString
 public class PersonalInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate the primary key
-    private Long id; // Numeric id for the primary key
+    @GeneratedValue(strategy = GenerationType.AUTO) // Auto-generate the UUID
+    private UUID uuid; // ✅ Changed from Long id to UUID
 
     @Column(name = "name")
     private String name; // Maps to 'name' column in DB

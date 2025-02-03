@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
 @Service
 public class ProjectService {
@@ -18,32 +19,30 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
-    public Project getProjectById(Long id) {
-        return projectRepository.findById(id).orElse(null);
+    public Project getProjectById(UUID uuid) { // Change to UUID
+        return projectRepository.findById(uuid).orElse(null);
     }
 
     public Project createProject(Project project) {
         return projectRepository.save(project);
     }
 
-    public Project updateProject(Long id, Project project) {
-    return projectRepository.findById(id)
-        .map(existingProject -> {
-            // Only update fields that are provided
-            if (project.getProjectName() != null) {
-                existingProject.setProjectName(project.getProjectName());
-            }
-            if (project.getDescription() != null) {
-                existingProject.setDescription(project.getDescription());
-            }
-            return projectRepository.save(existingProject);
-        })
-        .orElseThrow(() -> new NoSuchElementException("Project not found with id: " + id));
-        }
+    public Project updateProject(UUID uuid, Project project) { // Change to UUID
+        return projectRepository.findById(uuid)
+            .map(existingProject -> {
+                // Only update fields that are provided
+                if (project.getProjectName() != null) {
+                    existingProject.setProjectName(project.getProjectName());
+                }
+                if (project.getDescription() != null) {
+                    existingProject.setDescription(project.getDescription());
+                }
+                return projectRepository.save(existingProject);
+            })
+            .orElseThrow(() -> new NoSuchElementException("Project not found with uuid: " + uuid));
+    }
 
-    
-
-    public void deleteProject(Long id) {
-        projectRepository.deleteById(id);
+    public void deleteProject(UUID uuid) { // Change to UUID
+        projectRepository.deleteById(uuid);
     }
 }

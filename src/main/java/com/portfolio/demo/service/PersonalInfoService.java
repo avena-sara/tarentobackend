@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import java.util.UUID; // ✅ Import UUID
 
 @Service
 public class PersonalInfoService {
@@ -18,23 +18,23 @@ public class PersonalInfoService {
         return personalInfoRepository.findAll();
     }
 
-    public PersonalInfo getPersonalInfoById(Long id) {
-        return personalInfoRepository.findById(id).orElse(null);
+    public PersonalInfo getPersonalInfoById(UUID uuid) { // ✅ Changed Long to UUID
+        return personalInfoRepository.findById(uuid).orElse(null);
     }
 
     public PersonalInfo createPersonalInfo(PersonalInfo personalInfo) {
         return personalInfoRepository.save(personalInfo);
     }
 
-    public PersonalInfo updatePersonalInfo(Long id, PersonalInfo personalInfo) {
-        if (personalInfoRepository.existsById(id)) {
-            personalInfo.setId(id);
+    public PersonalInfo updatePersonalInfo(UUID uuid, PersonalInfo personalInfo) { // ✅ Changed Long to UUID
+        if (personalInfoRepository.existsById(uuid)) {
+            personalInfo.setUuid(uuid); // ✅ Set UUID instead of ID
             return personalInfoRepository.save(personalInfo);
         }
         return null;
     }
 
-    public void deletePersonalInfo(Long id) {
-        personalInfoRepository.deleteById(id);
+    public void deletePersonalInfo(UUID uuid) { // ✅ Changed Long to UUID
+        personalInfoRepository.deleteById(uuid);
     }
 }

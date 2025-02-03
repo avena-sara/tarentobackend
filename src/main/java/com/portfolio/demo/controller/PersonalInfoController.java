@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID; // ✅ Import UUID
+
 @CrossOrigin(origins = "http://localhost:5173") 
 @RestController
 @RequestMapping("/api/personal-info")
@@ -19,9 +21,9 @@ public class PersonalInfoController {
         return personalInfoService.getAllPersonalInfo();
     }
 
-    @GetMapping("/{id}")
-    public PersonalInfo getPersonalInfoById(@PathVariable Long id) {
-        return personalInfoService.getPersonalInfoById(id);
+    @GetMapping("/{uuid}") // ✅ Changed Long to UUID
+    public PersonalInfo getPersonalInfoById(@PathVariable UUID uuid) { // ✅ Changed Long to UUID
+        return personalInfoService.getPersonalInfoById(uuid);
     }
 
     @PostMapping
@@ -29,13 +31,13 @@ public class PersonalInfoController {
         return personalInfoService.createPersonalInfo(personalInfo);
     }
 
-    @PutMapping("/{id}")
-    public PersonalInfo updatePersonalInfo(@PathVariable Long id, @RequestBody PersonalInfo personalInfo) {
-        return personalInfoService.updatePersonalInfo(id, personalInfo);
+    @PutMapping("/{uuid}") // ✅ Changed Long to UUID
+    public PersonalInfo updatePersonalInfo(@PathVariable UUID uuid, @RequestBody PersonalInfo personalInfo) { // ✅ Changed Long to UUID
+        return personalInfoService.updatePersonalInfo(uuid, personalInfo);
     }
 
-    @DeleteMapping("/{id}")
-    public void deletePersonalInfo(@PathVariable Long id) {
-        personalInfoService.deletePersonalInfo(id);
+    @DeleteMapping("/{uuid}") // ✅ Changed Long to UUID
+    public void deletePersonalInfo(@PathVariable UUID uuid) { // ✅ Changed Long to UUID
+        personalInfoService.deletePersonalInfo(uuid);
     }
 }
